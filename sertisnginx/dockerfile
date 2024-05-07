@@ -5,12 +5,12 @@ FROM nginx
 WORKDIR /usr/share/nginx/html
 
 # Install git
-RUN apt-get update && apt-get install -y git nano python
+RUN apt-get update && apt-get install -y git nano python3
 
 # Clone the repository into nginx html directory
 RUN git clone https://github.com/sid-brest/sertis.by.git
 
-COPY replecerow.py /usr/share/nginx/html/
+ COPY /home/sid/dockerfiles/sertisnginx/replecerow.py /usr/share/nginx/html
 
 RUN mv -f /usr/share/nginx/html/replecerow.py /usr/share/nginx/html/sertis.by
 

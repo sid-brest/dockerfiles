@@ -1,0 +1,7 @@
+FROM nginx:latest
+
+COPY . /usr/share/nginx/html
+
+# RUN apt-get update && apt-get install -y git nano python3
+
+# RUN git clone https://github.com/sid-brest/sertis.by.git /usr/share/nginx/html/
