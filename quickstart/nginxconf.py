@@ -1,16 +1,14 @@
 import os
 
 # Define the folder path and the rows to replace
-folder_path = "/usr/share/nginx/html/sertis/"
+folder_path = "/etc/nginx/conf.d/"
 rows_to_replace = [ 
-    ("<meta http-equiv=\"Content-Security-Policy\" content=\"upgrade-insecure-requests\">", ""),
-    ("if (location.protocol === \"http:\")", ""),
-    ("location.protocol = \"https:\";", ""),
+    ("/usr/share/nginx/html", "/usr/share/nginx/html/sertis"),   
         
 ]
 # Iterate over all files in the folder
 for filename in os.listdir(folder_path):
-    if filename.endswith("html"):
+    if filename.endswith("conf"):
         file_path = os.path.join(folder_path, filename)
         
         # Read the contents of the file
