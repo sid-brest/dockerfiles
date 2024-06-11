@@ -1,9 +1,26 @@
+# Use the latest official Ubuntu image as a parent image
 FROM ubuntu:latest
 
+# Set DEBIAN_FRONTEND to noninteractive to avoid prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set the working directory
 WORKDIR /home/ubuntu
 
-COPY first_run.sh /home/ubuntu
+# Update and dist-upgrade the base image
+RUN apt-get update && apt-get dist-upgrade -y
 
-RUN chmod +x first_run.sh
+# Install prerequisites
+RUN apt-get install -y curl unzip
 
-RUN ./first_run.sh
+# Copy the first_run.sh script into the container
+COPY first_run.sh /home/ubuntu/first_run.sh
+
+# Make the script executable
+RUN chmod +x /home/ubuntu/first_run.sh
+
+# Run the script
+RUN /home/ubuntu/first_run.sh
+
+# Default command
+CMD ["bash"]

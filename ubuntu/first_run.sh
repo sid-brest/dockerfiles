@@ -15,10 +15,6 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
-# Update and upgrade packages
-print_message "Updating and upgrading system packages"
-apt update && apt upgrade -y
-
 # Install Python 3 and pip
 if command_exists python3 && command_exists pip3; then
   print_message "Python 3 and pip3 already installed"
@@ -47,6 +43,8 @@ else
   curl -sL https://deb.nodesource.com/setup_20.x | bash -
   apt install -y nodejs
   npm install -g npm
+  npm install -g typescript
+  npm install -g vi
 fi
 
 # Install AWS CDK
@@ -57,9 +55,9 @@ else
   npm install -g aws-cdk
 fi
 
-# Install additional utilities: git, tree, curl, nano, unzip
-print_message "Installing additional utilities: git, tree, curl, nano, unzip"
-apt install -y git tree curl nano unzip
+# Install additional utilities: git, tree, nano
+print_message "Installing additional utilities: git, tree, nano"
+apt install -y git tree nano
 
 # Verify installations
 print_message "Verifying installations"
