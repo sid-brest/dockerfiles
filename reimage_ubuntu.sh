@@ -1,6 +1,16 @@
 #!/bin/bash
+
 cd /home/sid/dockerfiles/ubuntu
-# Stop and remove containers if they exist
-sudo docker container ls -aq | grep "ubuntu" | xargs docker container rm -f
-sudo docker build -t ubuntu .
-sudo docker run --name ubuntu -it ubuntu /bin/bash
+
+# Stop and remove containers matching "ubuntu" in their name
+containers=$(docker ps -aq --filter "name=ubuntu")
+if [ -n "$containers" ]; then
+    docker stop $containers
+    docker rm $containers
+fi
+
+# Build the Docker image
+docker build -t ubuntu .
+
+# Run the Docker container
+docker run --name ubuntu -it ubuntu /bin/bash

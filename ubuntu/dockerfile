@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
-RUN apt-get update -y 
+WORKDIR /home/ubuntu
 
-RUN apt-get dist-upgrade -y
+COPY first_run.sh /home/ubuntu
 
-RUN apt-get install git -y
+RUN chmod +x first_run.sh
 
-# RUN git clone https://github.com/linsomniac/spotify_to_ytmusic.git
+RUN ./first_run.sh
